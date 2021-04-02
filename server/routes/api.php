@@ -19,5 +19,7 @@ Route::middleware(['auth:api', 'scope:view-user'])->get('/user', function (Reque
 });
 
 
+
+
 Route::get('/posts', 'Api\PostsController@index')
     ->middleware(['auth:api', 'scope:view-posts']);
