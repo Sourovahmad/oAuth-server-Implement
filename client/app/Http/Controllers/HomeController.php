@@ -24,23 +24,23 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $posts = [];
+         $posts = [];
 
-        if (auth()->user()->token) {
+        // if (auth()->user()->token) {
 
-            if (auth()->user()->token->hasExpired()) {
-                return redirect('/oauth/refresh');
-            }
+        //     if (auth()->user()->token->hasExpired()) {
+        //         return redirect('/oauth/refresh');
+        //     }
 
-            $response = Http::withHeaders([
-                'Accept' => 'application/json',
-                'Authorization' => 'Bearer ' . auth()->user()->token->access_token
-            ])->get(config('services.oauth_server.uri') . '/api/posts');
+        //     $response = Http::withHeaders([
+        //         'Accept' => 'application/json',
+        //         'Authorization' => 'Bearer ' . auth()->user()->token->access_token
+        //     ])->get(config('services.oauth_server.uri') . '/api/posts');
 
-            if ($response->status() === 200) {
-                $posts = $response->json();
-            }
-        }
+        //     if ($response->status() === 200) {
+        //         $posts = $response->json();
+        //     }
+        // }
 
         return view('home', [
             'posts' => $posts

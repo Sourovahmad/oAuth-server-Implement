@@ -13,7 +13,7 @@ class OAuthController extends Controller
 
             $queries = http_build_query([
 
-            'client_id' => '2',
+            'client_id' => '1',
             'redirect_uri' => 'http://127.0.0.1:8000/oauth/callback',
             'response_type' => 'code'
            
@@ -27,16 +27,29 @@ class OAuthController extends Controller
        public function callback(Request $request)
     {
 
-        dd($request->all());
 
 
-        // $response = Http::post(config('services.oauth_server.uri') . '/oauth/token', [
-        //     'grant_type' => 'authorization_code',
-        //     'client_id' => config('services.oauth_server.client_id'),
-        //     'client_secret' => config('services.oauth_server.client_secret'),
-        //     'redirect_uri' => config('services.oauth_server.redirect'),
-        //     'code' => $request->code
-        // ]);
+        $response = Http::post('http://127.0.0.1:7000/oauth/token',[
+            'grant_type' => 'authorization_code',
+            'client_id' => '1',
+            'client_secret' =>'yftEyC5yzRFHZ8nmXvtQxfIsk7W8BAe8H1ZqAx5X',
+            'redirect_uri' => 'http://127.0.0.1:8000/oauth/callback',
+            'code' => $request->code
+
+        ]);
+     
+            
+
+               
+        
+                $response = $response->json();
+
+                $request->user()->token()->delete();
+                $request->user()->token()->create([
+                    'access_token' => $response['access_token'],
+                ]);
+
+                return redirect('/home');
 
     }
 
