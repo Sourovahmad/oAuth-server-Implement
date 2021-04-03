@@ -14,7 +14,7 @@ class OAuthController extends Controller
 
             $queries = http_build_query([
 
-            'client_id' => '1',
+            'client_id' => '2',
             'redirect_uri' => 'http://127.0.0.1:8000/oauth/callback',
             'response_type' => 'code'
            
@@ -31,18 +31,20 @@ class OAuthController extends Controller
 
         $response = Http::post('http://127.0.0.1:7000/oauth/token',[
             'grant_type' => 'authorization_code',
-            'client_id' => '1',
-            'client_secret' =>'dnmQms7ktySrjq9lztnHHmuG3CGejFnAyCLBTqRq',
+            'client_id' => '2',
+            'client_secret' =>'UabsSaKTryn6DFYzjHJwV8kjcgAipYEQwz8uxws8',
             'redirect_uri' => 'http://127.0.0.1:8000/oauth/callback',
             'code' => $request->code
 
 
 
         ]);
-
+         
+          
                 $response = $response->json();
-                 
+                
                 $request->user()->token()->delete();
+
                 $request->user()->token()->create([
                     'access_token' => $response['access_token'],
                 ]);
