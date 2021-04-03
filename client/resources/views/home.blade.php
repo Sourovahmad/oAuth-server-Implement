@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                        <a href="/oauth/redirect">Authorize from server</a>
+                        <a href="/oauth/redirect" target="_blank">Authorize from server</a>
                   
 
                     @foreach ($posts as $post)

@@ -1,6 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
+
+@if (\Session::has('success'))
+    <div class="alert alert-success">
+        <ul>
+            <li>{!! \Session::get('success') !!}</li>
+        </ul>
+    </div>
+@endif
+
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -14,7 +24,11 @@
                         </div>
                     @endif
 
-                    You are logged in!
+
+                        Hello .. You Are Logged In
+              
+
+                    
                 </div>
             </div>
         </div>
