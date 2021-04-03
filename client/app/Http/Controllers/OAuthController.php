@@ -41,7 +41,7 @@ class OAuthController extends Controller
         ]);
 
                 $response = $response->json();
-    
+                 
                 $request->user()->token()->delete();
                 $request->user()->token()->create([
                     'access_token' => $response['access_token'],
